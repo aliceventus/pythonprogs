@@ -5,6 +5,10 @@ from config import TG_TOKEN, TG_API_URL
 import re
 
 def start(update, context):
+	log = open('log.txt', 'a')
+	log.write('/start' + str(update.effective_chat.id) + '/n')
+	log.close()
+	print(update.effective_chat.id)
 	context.bot.send_message(
 		chat_id = update.effective_chat.id,
 		text = 'Привет! Я могу посчитать Ваш индекс массы тела. Введите, разделяя пробелом, свой вес в килограммах и рост в сантиметрах. Например: 107 170'
@@ -13,6 +17,9 @@ def start(update, context):
 def answer(update, context):
 	t = 'Либо нормально вводите, либо я буду плакатц и резать вены на ногах.'
 	msg = update.message.text
+	log = open('log.txt', 'a')
+	log.write(str(msg) + '/n')
+	print(msg)
 	if bool(re.match('[0-9]+ [0-9]+', msg)):
 		mass, height = msg.split()
 		mass = float(mass)
@@ -32,6 +39,9 @@ def answer(update, context):
 			t = 'Ваш ИМТ:'+ str(ind) + ' кг/м^2. Это считается резким ожирением.'
 		if ind > 40:
 			t = 'Ваш ИМТ:'+ str(ind) + ' кг/м^2. Это считается очень резким ожирением.'
+	log.write(t + ' ' + str(update.effective_chat.id) + '/n')
+	log.close()
+	print(t, ' ', update.effective_chat.id)
 	context.bot.send_message(
         chat_id = update.effective_chat.id,
         text = t
@@ -52,6 +62,7 @@ def main():
     updater.dispatcher.add_handler(message_handler)
 
     updater.start_polling()
+	
 
 if __name__ == '__main__':
     main()
