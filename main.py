@@ -40,8 +40,8 @@ def answer(update, context):
 
 def main():
     updater = Updater(
-        token = TG_TOKEN,
-        base_url = TG_API_URL,
+        token = TG_TOKEN, #telegram token
+        base_url = TG_API_URL, #just a rkn blockade bypass link
         use_context = True
     )
 
