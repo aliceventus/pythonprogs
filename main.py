@@ -11,7 +11,7 @@ def start(update, context):
 		)
 
 def answer(update, context):
-	t = 'Либо нормально вводи, либо соси мой женский пенис, бубун.'
+	t = 'Либо нормально вводите, либо я буду плакатц и резать вены на ногах.'
 	msg = update.message.text
 	if bool(re.match('[0-9]+ [0-9]+', msg)):
 		mass, height = msg.split()
